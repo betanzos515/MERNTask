@@ -2,7 +2,6 @@ const Usuario = require('../models/Usuarios');
 const bcryptjs = require('bcryptjs');
 const { validationResult } = require('express-validator');
 const jwt = require('jsonwebtoken');
-const authController = require('../controllers/usuarioController')
 
 exports.autenticarUsuario = async(req, res)=>{
     const errores = validationResult(req);
@@ -32,9 +31,9 @@ exports.autenticarUsuario = async(req, res)=>{
             expiresIn: 3600 //el tiempo de expiracion del token
         },(error,token)=>{
             if(error) throw error;
-
+            
             //mensaje de confirmacion
-            res.json({ token });
+            console.log(token);
         });
     } catch (error) {
         console.log(error);

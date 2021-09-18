@@ -6,7 +6,6 @@ const { check } = require('express-validator');
 
 //crear un usuario
 //api/usuarios <- endpoint
-
 router.post('/',
     [
         //utilizamos la funcion check y vamos definiendo los campos a validar, cual sera su mensaje de error y que reglas van a aplicar.

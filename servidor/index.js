@@ -17,6 +17,9 @@ app.use(express.json({ extended: true }));
 //7.- importamos rutas en express ah estos se le conocen como meddlaware
 app.use('/api/usuarios',require('./routes/usuarios')); 
 app.use('/api/auth',require('./routes/auth')); 
+app.use('/api/proyectos',require('./routes/proyectos')); 
+app.use('/api/proyectos/?id',require('./routes/proyectos')); 
+app.use('/api/tareas/',require('./routes/tareas')); 
 
 //2,-configuramos el puerto dependiendo si está en despliegue o en local
 const PORT = process.env.PORT || 4000;
