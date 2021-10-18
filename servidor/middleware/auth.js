@@ -2,8 +2,7 @@ const jwt = require('jsonwebtoken');
 module.exports = (req, res, next)=>{
     //leer el token del headoer
     const token = req.header('x-auth-token');
-    console.log(token);
-    
+
     //revisar si no hay token
     if(!token){
         res.status(401).json({msg:'No hay token, permiso no valido'});

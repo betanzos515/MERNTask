@@ -7,9 +7,14 @@ const conectarDB = require('./config/db');
 //2.-usamos la funcion de express para nuestro servidor app
 const app = express()
 
+//importamos cors
+const cors = require('cors');
+
 //6.- conectamos a la base de datos
 conectarDB();
 
+//habilitamos cors
+app.use(cors());
 
 //8.- habilitar express.json este nos permite leer datos enviados por post (tiene que ir antes para que reconosca la decodificacion de la url). es una alternativa a body parse
 app.use(express.json({ extended: true }));

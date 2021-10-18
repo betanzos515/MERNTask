@@ -1,7 +1,26 @@
-import React, { useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import { Link } from 'react-router-dom';
+import { AlertaContext } from "../../context/alertas/alertasContex";
+import { authContext } from "../../context/autenticacion/authContext";
 
-export const Login = () => {
+export const Login = (props) => {
+
+    //extraer los valores del contexto
+    const alertaContext = useContext(AlertaContext);
+    const contextoAuth = useContext(authContext);
+
+    const { alerta, mostrarAlerta } = alertaContext;
+    const { mensaje, autenticado, inciarSesion } = contextoAuth;
+    
+    useEffect(() => {
+        if(autenticado){
+            props.history.push('/proyectos');
+        }
+        if(mensaje){
+            mostrarAlerta(mensaje.msg , mensaje.categoria);
+        }
+        // eslint-disable-next-line
+    }, [mensaje,autenticado])
     
     //State para iniciar sesion
     const [usuario, guardarUsuario] = useState({
@@ -21,7 +40,10 @@ export const Login = () => {
 
     const handleSubmit = (e)=>{
         e.preventDefault();
-        console.log('Hola Submit');
+        if(email.trim === '' || password.trim() === ''){
+            mostrarAlerta('Todos los campos son obligatorios','alerta-error');
+        } 
+        inciarSesion({email,password});
     }
 
     return (
@@ -31,6 +53,11 @@ export const Login = () => {
                 <form
                     onSubmit={handleSubmit}
                 >
+                    { 
+                        alerta ? ( 
+                            <div className={`alerta ${alerta.categoria}`}>{ alerta.msg }</div> 
+                        ) : null 
+                    }
                 <div className='campo-form'>
                         <label htmlFor='email'>Email</label>
                         <input

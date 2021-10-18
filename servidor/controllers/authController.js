@@ -8,7 +8,7 @@ exports.autenticarUsuario = async(req, res)=>{
     if(!errores.isEmpty()){
         return res.status(400).json({ errores: errores.array() });
     }
-    const { email,password } = req.body
+    const { email, password } = req.body
 
     try {
         //Revisar que sea un usuario registrado.
@@ -20,7 +20,6 @@ exports.autenticarUsuario = async(req, res)=>{
         if(!passCorrecto){
             return res.status(400).json({ msg:'Password incorrecto' });
         }
-
         //si todo es correcto crear y firmar el jwt
         const payload = {
             usuario:{
@@ -31,12 +30,21 @@ exports.autenticarUsuario = async(req, res)=>{
             expiresIn: 3600 //el tiempo de expiracion del token
         },(error,token)=>{
             if(error) throw error;
-            
             //mensaje de confirmacion
-            console.log(token);
+            res.json({token});
         });
     } catch (error) {
         console.log(error);
     }
 }
 
+//obtiene que usuario está autenticado
+exports.usuarioAutenticado = async(req, res)=>{
+    try {
+        const usuario = await Usuario.findById(req.usuario.id).select('-password'); //con esto excluimos el campo de password
+        res.json({usuario});
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({msg:'Hubo un error'});
+    }
+}

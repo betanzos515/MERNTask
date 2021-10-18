@@ -1,16 +1,26 @@
-import { ACTUALIZAR_TAREA, AGREGAR_TAREA, ELIMINAR_TAREA, ESTADO_TAREA, LIMPIAR_TAREA, OBTENER_TAREAS, SELECCIONAR_TAREA, VALIDAR_TAREA } from "../../types";
+import { 
+    ACTUALIZAR_TAREA,
+    AGREGAR_TAREA, 
+    ELIMINAR_TAREA, 
+    ESTADO_TAREA, 
+    LIMPIAR_TAREA, 
+    OBTENER_TAREAS, 
+    SELECCIONAR_TAREA, 
+    VALIDAR_TAREA 
+} from "../../types";
 
+// eslint-disable-next-line 
 export default ( state, action )=>{
     switch(action.type){
         case OBTENER_TAREAS:
             return{
                 ...state,
-                tareasproyecto: state.tareas.filter(tarea => tarea.proyectoId === action.payload.id)
+                tareasproyecto: action.payload
             }
         case AGREGAR_TAREA:
             return{
                 ...state,
-                tareas:[action.payload,...state.tareas],
+                tareasproyecto:[action.payload,...state.tareasproyecto],
                 errorTarea:false
             }
         case VALIDAR_TAREA:
@@ -21,13 +31,13 @@ export default ( state, action )=>{
         case ELIMINAR_TAREA:
             return{
                 ...state,
-                tareas: state.tareas.filter( tarea => tarea.id !== action.payload.id )
+                tareasproyecto: state.tareasproyecto.filter( tarea => tarea._id !== action.payload)
             }
         case ACTUALIZAR_TAREA:
         case ESTADO_TAREA: 
             return{
                 ...state,
-                tareas: state.tareas.map(tarea => tarea.id === action.payload.id ? action.payload : tarea),
+                tareasproyecto: state.tareasproyecto.map(tarea => tarea.id === action.payload.id ? action.payload : tarea),
             }
         case SELECCIONAR_TAREA:
             return{

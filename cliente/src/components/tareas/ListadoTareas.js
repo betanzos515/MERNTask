@@ -1,7 +1,6 @@
-import { useContext } from "react"
+import { useContext, useEffect } from "react"
 import { proyectoContext } from "../../context/proyectos/proyectoContex"
 import { tareaContext } from "../../context/tareas/tareaContext"
-import { CSSTransition, TransitionGroup } from "react-transition-group";
 import { Tarea } from "./Tarea"
 
 export const ListadoTareas = () => {
@@ -21,25 +20,16 @@ export const ListadoTareas = () => {
         <>
             <h2>Proyecto : { nombre }</h2>
 
-            <ul className="listado-tareas">
+            <div className="listado-tareas">
                 {
                     tareasproyecto.length === 0 
-                    ? (<li key={0} className='tarea'><p>No hay tareas</p></li>)
-                    : <TransitionGroup>
-                        {
-                        tareasproyecto.map(tarea=>(
-                            <CSSTransition
-                                key={tarea.id}
-                                timeout={200}
-                                classNames='tarea'
-                            >
-                                <Tarea key={tarea.id} tarea={tarea}/>
-                            </CSSTransition>
-                        ))
-                        }
-                    </TransitionGroup>
+                    ? (<p key={Date.now()} className='tarea'>No hay tareas</p>)
+                    : 
+                    tareasproyecto.map(tarea=>(
+                        <Tarea key={tarea._id} tarea={tarea}/>
+                    ))
                 }
-            </ul> 
+            </div> 
             <button
                 type='button'
                 className='btn btn-eliminar'

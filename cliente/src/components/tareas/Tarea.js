@@ -9,14 +9,14 @@ export const Tarea = ({ tarea }) => {
     const { proyecto } = useContext(proyectoContext);
 
     const handleDelete = ()=>{
-        eliminarTarea(tarea);
-        obtenerTareas(proyecto[0]);
+        eliminarTarea(tarea._id,proyecto[0]._id);
+        obtenerTareas(proyecto[0]._id);
     }
 
     const handleEstado = estado=>{
         tarea.estado = estado;
         modificarEstado(tarea);
-        obtenerTareas(proyecto[0]);
+        obtenerTareas(proyecto[0]._id);
     }
     
     const handleSeleccionar = ()=>{

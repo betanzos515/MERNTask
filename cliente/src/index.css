@@ -7,6 +7,10 @@
     --headingFont:'Raleway', sans-serif;
     --textFont:  'Roboto', sans-serif;
   }
+
+  .white{
+    color:white
+  }
   *, *:before, *:after {
     box-sizing: inherit;
   } 

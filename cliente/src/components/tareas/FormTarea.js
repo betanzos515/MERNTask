@@ -15,13 +15,13 @@ export const FormTarea = () => {
     } = useContext(tareaContext);
     
     const [ tareaState, guardarTareas ] = useState('');
-
+    
     useEffect(() => {
         if(tareaSeleccionada !== null) 
             guardarTareas(tareaSeleccionada.nombre)
         else 
             guardarTareas('');
-    }, [tareaSeleccionada])
+    }, [tareaSeleccionada]);
 
     if(!proyecto) return null;
     
@@ -35,23 +35,22 @@ export const FormTarea = () => {
         }
 
         if(tareaSeleccionada === null){
-            console.log('Vamos a agregar');
             agregarTarea({
                 nombre:tareaState,
                 estado:false,
-                proyectoId: proyecto[0].id,
+                proyecto: proyecto[0]._id,
             });
         }else{
-            const { estado, proyectoId, id } = tareaSeleccionada
+            const { estado, id } = tareaSeleccionada
             actualizarTarea({
                 nombre: tareaState,
                 estado,
-                proyectoId,
+                proyecto,
                 id
             })
             limpiarTarea();
         }
-        obtenerTareas(proyecto[0]);
+        obtenerTareas(proyecto[0]._id);
         guardarTareas('');
     }
 
