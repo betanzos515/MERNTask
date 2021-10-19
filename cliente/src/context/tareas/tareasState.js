@@ -69,12 +69,12 @@ export const TareaState = (props)=>{
         }
     }
 
-    const modificarEstado = (tarea)=>{
-        dispatch({
-            type: ESTADO_TAREA,
-            payload : tarea
-        })
-    }
+    // const modificarEstado = (tarea)=>{
+    //     dispatch({
+    //         type: ESTADO_TAREA,
+    //         payload : tarea
+    //     })
+    // }
 
     const seleccionarTarea = (tarea)=>{
         dispatch({
@@ -83,11 +83,17 @@ export const TareaState = (props)=>{
         })
     }
 
-    const actualizarTarea = tarea =>{
-        dispatch({
-            type: ACTUALIZAR_TAREA,
-            payload: tarea
-        })
+    const actualizarTarea = async tarea =>{
+        try {
+            const resultado = await clienteAxios.put(`/api/tareas/${tarea._id}`,tarea);
+            console.log(resultado);
+            dispatch({
+                type: ACTUALIZAR_TAREA,
+                payload: resultado.data.tarea
+            })
+        } catch (error) {
+            console.log(error.response) ;
+        }
     }
 
     const limpiarTarea = ()=>{
@@ -106,7 +112,7 @@ export const TareaState = (props)=>{
                 agregarTarea,
                 validarTarea,
                 eliminarTarea,
-                modificarEstado,
+                //modificarEstado,
                 seleccionarTarea,
                 actualizarTarea,
                 limpiarTarea

@@ -5,7 +5,7 @@ import { tareaContext } from '../../context/tareas/tareaContext';
 export const Tarea = ({ tarea }) => {
 
     const { nombre, estado } = tarea;
-    const { eliminarTarea, obtenerTareas, modificarEstado, seleccionarTarea  } = useContext(tareaContext);
+    const { eliminarTarea, obtenerTareas, actualizarTarea, seleccionarTarea  } = useContext(tareaContext);
     const { proyecto } = useContext(proyectoContext);
 
     const handleDelete = ()=>{
@@ -15,7 +15,7 @@ export const Tarea = ({ tarea }) => {
 
     const handleEstado = estado=>{
         tarea.estado = estado;
-        modificarEstado(tarea);
+        actualizarTarea(tarea);
         obtenerTareas(proyecto[0]._id);
     }
     

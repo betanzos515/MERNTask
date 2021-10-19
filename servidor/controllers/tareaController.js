@@ -70,7 +70,7 @@ exports.actualizarTarea = async (req, res) => {
     }
     //creamos un objeto con la nueva información
     const nuevaTarea = {};
-    if (nombre) nuevaTarea.nombre = nombre;
+    nuevaTarea.nombre = nombre;
     nuevaTarea.estado = estado;
     //guardamos la tarea
     tarea = await Tarea.findOneAndUpdate({ _id: req.params.id }, nuevaTarea, {

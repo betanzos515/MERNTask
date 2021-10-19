@@ -41,12 +41,12 @@ export const FormTarea = () => {
                 proyecto: proyecto[0]._id,
             });
         }else{
-            const { estado, id } = tareaSeleccionada
+            const { estado, _id } = tareaSeleccionada
             actualizarTarea({
                 nombre: tareaState,
                 estado,
                 proyecto,
-                id
+                _id
             })
             limpiarTarea();
         }
