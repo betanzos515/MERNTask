@@ -4,7 +4,6 @@ import {
     ACTUALIZAR_TAREA,
     AGREGAR_TAREA, 
     ELIMINAR_TAREA, 
-    ESTADO_TAREA, 
     LIMPIAR_TAREA, 
     OBTENER_TAREAS, 
     SELECCIONAR_TAREA, 
@@ -25,7 +24,6 @@ export const TareaState = (props)=>{
 
     //obtener las tareas de un pr,oyecto
     const obtenerTareas = async proyecto => {
-        console.log('Entramos');
         try {
             const resultado = await clienteAxios.get('/api/tareas/',{ params: { proyecto } });
             dispatch({
@@ -59,7 +57,6 @@ export const TareaState = (props)=>{
     const eliminarTarea = async (tarea, proyecto)=>{
         try {
             await clienteAxios.delete(`/api/tareas/${tarea}`,{ params: { proyecto }});
-            console.log(tarea);
             dispatch({
                 type: ELIMINAR_TAREA,
                 payload: tarea
@@ -86,7 +83,6 @@ export const TareaState = (props)=>{
     const actualizarTarea = async tarea =>{
         try {
             const resultado = await clienteAxios.put(`/api/tareas/${tarea._id}`,tarea);
-            console.log(resultado);
             dispatch({
                 type: ACTUALIZAR_TAREA,
                 payload: resultado.data.tarea

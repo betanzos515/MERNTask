@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react"
+import { useContext } from "react"
 import { proyectoContext } from "../../context/proyectos/proyectoContex"
 import { tareaContext } from "../../context/tareas/tareaContext"
 import { Tarea } from "./Tarea"
@@ -23,7 +23,7 @@ export const ListadoTareas = () => {
             <div className="listado-tareas">
                 {
                     tareasproyecto.length === 0 
-                    ? (<p key={Date.now()} className='tarea'>No hay tareas</p>)
+                    ? (<p className='tarea'>No hay tareas</p>)
                     : 
                     tareasproyecto.map(tarea=>(
                         <Tarea key={tarea._id} tarea={tarea}/>
