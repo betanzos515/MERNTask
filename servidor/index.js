@@ -27,10 +27,10 @@ app.use('/api/proyectos/?id',require('./routes/proyectos'));
 app.use('/api/tareas/',require('./routes/tareas')); 
 
 //2,-configuramos el puerto dependiendo si está en despliegue o en local
-const PORT = process.env.PORT || 4000;
+const port = process.env.port || 4000;
 
 //3.-funcion de arranque de nuestro servidor
-app.listen(PORT, ()=>{
+app.listen(port,'0.0.0.0',()=>{
     console.log(`El servidor esta corriendo en el puerto ${PORT}`);
 })
 
